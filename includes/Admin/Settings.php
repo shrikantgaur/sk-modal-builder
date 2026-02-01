@@ -23,48 +23,52 @@ class SK_Modal_Admin_Settings {
         );
 
         $fields = [
-            'bg_color'       => 'Modal Background Color',
-            'overlay_color'  => 'Overlay Color',
-            'text_color'     => 'Text Color',
-            'width'          => 'Modal Width (px)',
-            'radius'         => 'Border Radius (px)',
-            'animation'      => 'Animation',
-            'close_color'    => 'Close Button Color',
+            'bg_color'       => ['label' => 'Modal Background', 'icon' => 'dashicons-art'],
+            'overlay_color'  => ['label' => 'Overlay Color', 'icon' => 'dashicons-format-image'],
+            'text_color'     => ['label' => 'Text Color', 'icon' => 'dashicons-editor-textcolor'],
+            'close_color'    => ['label' => 'Close Button Color', 'icon' => 'dashicons-no'],
+            'width'          => ['label' => 'Modal Width (px)', 'icon' => 'dashicons-editor-expand'],
+            'radius'         => ['label' => 'Border Radius (px)', 'icon' => 'dashicons-rounded-corner'],
+            'animation'      => ['label' => 'Animation Style', 'icon' => 'dashicons-image-flip-horizontal'],
+            'z_index'        => ['label' => 'Z-Index', 'icon' => 'dashicons-layers'],
+            'overlay_close'  => ['label' => 'Close on Overlay Click', 'icon' => 'dashicons-dismiss'],
+            'esc_close'      => ['label' => 'Close on ESC Key', 'icon' => 'dashicons-keyboard'],
         ];
 
-        foreach ($fields as $key => $label) {
+        foreach ($fields as $key => $field) {
             add_settings_field(
                 $key,
-                __($label, 'sk-modal-builder'),
+                __($field['label'], 'sk-modal-builder'), // Use string label
                 [$this, 'render_field'],
                 'sk_modal_options',
                 'sk_modal_style',
-                ['key' => $key]
+                [
+                    'key'   => $key,
+                    'label' => $field['label'],
+                    'icon'  => $field['icon'],
+                ]
             );
         }
     }
 
     public function render_field($args) {
 
-        $key = $args['key'];
-
-        // DEFAULT VALUES
-        $defaults = [
-            'bg_color'      => '#ffffff',
-            'overlay_color' => 'rgba(0,0,0,0.6)', // overlay can be rgba
-            'text_color'    => '#000000',
-            'close_color'   => '#000000',
-            'width'         => 500,
-            'radius'        => 10,
-            'animation'     => 'fade',
-        ];
+        $key  = $args['key'];
+        $icon = $args['icon'] ?? 'dashicons-admin-generic';
 
         $options = wp_parse_args(
             get_option('sk_modal_settings', []),
-            $defaults
+            $this->get_defaults()
         );
 
-        $value = $options[$key];
+        $value = $options[$key] ?? '';
+
+        echo '<div class="sk-setting-card">';
+
+        // Only show icon, don't repeat label
+        echo '<div class="sk-setting-label">';
+        echo '<span class="dashicons ' . esc_attr($icon) . '"></span>';
+        echo '</div>';
 
         switch ($key) {
 
@@ -78,11 +82,21 @@ class SK_Modal_Admin_Settings {
                 <?php
                 break;
 
+            case 'overlay_close':
+            case 'esc_close':
+                ?>
+                <label class="sk-switch">
+                    <input type="checkbox" name="sk_modal_settings[<?php echo esc_attr($key); ?>]" value="1" <?php checked($value, 1); ?>>
+                    <span class="sk-slider"></span>
+                </label>
+                <?php
+                break;
+
             case 'width':
             case 'radius':
+            case 'z_index':
                 ?>
                 <input type="number"
-                    min="0"
                     name="sk_modal_settings[<?php echo esc_attr($key); ?>]"
                     value="<?php echo esc_attr($value); ?>" />
                 <?php
@@ -92,22 +106,41 @@ class SK_Modal_Admin_Settings {
                 ?>
                 <input type="text"
                     class="sk-color-field"
-                    data-default-color="<?php echo esc_attr($value); ?>"
                     name="sk_modal_settings[<?php echo esc_attr($key); ?>]"
                     value="<?php echo esc_attr($value); ?>" />
                 <?php
         }
+
+        echo '</div>';
     }
 
     public function sanitize($input) {
         return [
-            'bg_color'      => sanitize_hex_color($input['bg_color'] ?? '#ffffff'),
-            'overlay_color' => sanitize_hex_color($input['overlay_color'] ?? '#000000'),
-            'text_color'    => sanitize_hex_color($input['text_color'] ?? '#000000'),
-            'close_color'   => sanitize_hex_color($input['close_color'] ?? '#000000'),
+            'bg_color'      => sanitize_text_field($input['bg_color'] ?? '#ffffff'),
+            'overlay_color' => sanitize_text_field($input['overlay_color'] ?? 'rgba(0,0,0,0.6)'),
+            'text_color'    => sanitize_text_field($input['text_color'] ?? '#000000'),
+            'close_color'   => sanitize_text_field($input['close_color'] ?? '#000000'),
             'width'         => absint($input['width'] ?? 500),
             'radius'        => absint($input['radius'] ?? 10),
+            'z_index'       => absint($input['z_index'] ?? 9999),
             'animation'     => sanitize_text_field($input['animation'] ?? 'fade'),
+            'overlay_close' => !empty($input['overlay_close']) ? 1 : 0,
+            'esc_close'     => !empty($input['esc_close']) ? 1 : 0,
+        ];
+    }
+
+    private function get_defaults() {
+        return [
+            'bg_color'      => '#ffffff',
+            'overlay_color' => 'rgba(0,0,0,0.6)',
+            'text_color'    => '#000000',
+            'close_color'   => '#000000',
+            'width'         => 500,
+            'radius'        => 10,
+            'animation'     => 'fade',
+            'z_index'       => 9999,
+            'overlay_close' => 1,
+            'esc_close'     => 1,
         ];
     }
 }

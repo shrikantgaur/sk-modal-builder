@@ -398,3 +398,144 @@
 .sk-specific {
     margin-top: 12px;
 }
+
+/* ==========================
+   General Setting Layout
+========================== */
+form.sk-settings-form {
+    background: #ffffff;
+    border-radius: 12px;
+    border: 1px solid #e5e7eb;
+    padding: 18px 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    transition: all 0.2s ease;
+}
+
+.sk-setting-card {
+    display: flex;
+    gap: 10px;
+    background: #ffffff;
+    border-radius: 12px;
+    border: 1px solid #e5e7eb;
+    padding: 18px 20px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    transition: all 0.2s ease;
+}
+
+.sk-setting-card:hover {
+    box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+}
+
+/* Label + Icon */
+.sk-setting-label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.sk-setting-label .dashicons {
+    font-size: 18px;
+    color: #2271b1;
+}
+
+.sk-setting-label strong {
+    font-size: 14px;
+    color: #0f172a;
+}
+
+/* Input, select, and color fields */
+.sk-setting-card input[type="text"],
+.sk-setting-card input[type="number"],
+.sk-setting-card select {
+    width: 100%;
+    padding: 8px 12px;
+    font-size: 14px;
+    border-radius: 8px;
+    border: 1px solid #d1d5db;
+    transition: all 0.2s ease;
+}
+
+.sk-setting-card input:focus,
+.sk-setting-card select:focus {
+    border-color: #2271b1;
+    box-shadow: 0 0 5px rgba(34, 113, 177, 0.2);
+    outline: none;
+}
+
+/* ==========================
+   Toggle Switches
+========================== */
+.sk-switch {
+    position: relative;
+    display: inline-block;
+    width: 50px;
+    height: 26px;
+}
+
+.sk-switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.sk-slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0; left: 0;
+    right: 0; bottom: 0;
+    background-color: #d1d5db;
+    border-radius: 26px;
+    transition: 0.4s;
+}
+
+.sk-slider:before {
+    position: absolute;
+    content: "";
+    height: 22px;
+    width: 22px;
+    left: 2px;
+    bottom: 2px;
+    background-color: #ffffff;
+    border-radius: 50%;
+    transition: 0.4s;
+}
+
+.sk-switch input:checked + .sk-slider {
+    background-color: #2271b1;
+}
+
+.sk-switch input:checked + .sk-slider:before {
+    transform: translateX(24px);
+}
+
+/* ==========================
+   Color Picker Fields
+========================== */
+.sk-color-field {
+    padding: 6px 10px;
+    border-radius: 8px;
+    border: 1px solid #d1d5db;
+    transition: all 0.2s ease;
+    width: 100%;
+}
+
+.sk-color-field:focus {
+    border-color: #2271b1;
+    box-shadow: 0 0 5px rgba(34,113,177,0.2);
+}
+
+/* ==========================
+   Responsive
+========================== */
+@media (max-width: 768px) {
+    .sk-setting-card {
+        padding: 15px;
+    }
+
+    .sk-setting-label {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 6px;
+    }
+}
