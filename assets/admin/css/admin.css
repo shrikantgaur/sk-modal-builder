@@ -296,3 +296,105 @@
         width: 100%;
     }
 }
+
+/* ==========================
+   Premium Meta Box Cards
+========================== */
+.skmb-card {
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 18px 20px;
+    border: 1px solid #e5e7eb;
+    margin-bottom: 18px;
+}
+
+.skmb-card-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    margin-bottom: 14px;
+    color: #0f172a;
+}
+
+.skmb-card-header .dashicons {
+    color: #2271b1;
+}
+
+/* ==========================
+   Toggle Switch (Premium)
+========================== */
+.skmb-switch {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.skmb-switch input {
+    display: none;
+}
+
+.skmb-slider {
+    width: 44px;
+    height: 24px;
+    background: #cbd5e1;
+    border-radius: 999px;
+    position: relative;
+    cursor: pointer;
+    transition: all 0.25s ease;
+}
+
+.skmb-slider::after {
+    content: '';
+    width: 18px;
+    height: 18px;
+    background: #fff;
+    border-radius: 50%;
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    transition: all 0.25s ease;
+}
+
+.skmb-switch input:checked + .skmb-slider {
+    background: #2271b1;
+}
+
+.skmb-switch input:checked + .skmb-slider::after {
+    transform: translateX(20px);
+}
+
+/* ==========================
+   Sidebar Status
+========================== */
+.skmb-status {
+    background: #f8fafc;
+    border-radius: 12px;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.skmb-status .dashicons {
+    font-size: 20px;
+    color: #2271b1;
+}
+
+/* ==========================
+   Premium Select & Inputs
+========================== */
+.skmb-field select,
+.skmb-field input[type="number"] {
+    border-radius: 8px;
+    padding: 8px 12px;
+    border: 1px solid #cbd5e1;
+    font-size: 14px;
+}
+
+/* ==========================
+   Page Specific Logic
+========================== */
+.sk-specific {
+    margin-top: 12px;
+}

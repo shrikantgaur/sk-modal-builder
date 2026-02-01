@@ -57,16 +57,13 @@ jQuery(function ($) {
 
         initPageSelector() {
             const $select = $('#sk-modal-pages-select');
-            const $pages = $('#sk-modal-specific-pages');
-            const $front = $('#sk-modal-front-page-wrapper');
+            const $specificBlocks = $('.sk-specific');
 
             const togglePages = () => {
                 if ($select.val() === 'specific') {
-                    $pages.slideDown(150);
-                    $front.slideDown(150);
+                    $specificBlocks.slideDown(180);
                 } else {
-                    $pages.slideUp(150);
-                    $front.slideUp(150);
+                    $specificBlocks.slideUp(180);
                 }
             };
 

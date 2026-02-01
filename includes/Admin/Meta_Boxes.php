@@ -40,72 +40,86 @@ class SK_Modal_Admin_Meta_Boxes {
             'front_page'     => 0,
         ]);
 
-        $all_pages = get_pages(); // All pages
-        $front_page_id = get_option('page_on_front');
+        $all_pages = get_pages();
         ?>
-        <table class="form-table">
 
-            <!-- Enable Modal -->
-            <tr>
-                <th><?php _e('Enable Modal', 'sk-modal-builder'); ?></th>
-                <td>
-                    <label>
+        <div class="skmb-builder">
+
+            <!-- LEFT CONTENT -->
+            <div class="skmb-content">
+
+                <!-- Enable -->
+                <div class="skmb-card">
+                    <div class="skmb-card-header">
+                        <span class="dashicons dashicons-visibility"></span>
+                        <strong><?php _e('Modal Activation', 'sk-modal-builder'); ?></strong>
+                    </div>
+
+                    <label class="skmb-switch">
                         <input type="checkbox" name="sk_modal[enabled]" value="1" <?php checked($settings['enabled'], 1); ?>>
-                        <?php _e('Active', 'sk-modal-builder'); ?>
+                        <span class="skmb-slider"></span>
+                        <span class="skmb-switch-label"><?php _e('Enable Modal', 'sk-modal-builder'); ?></span>
                     </label>
-                </td>
-            </tr>
+                </div>
 
-            <!-- Trigger -->
-            <tr>
-                <th><?php _e('Trigger', 'sk-modal-builder'); ?></th>
-                <td>
-                    <select name="sk_modal[trigger]" id="sk-modal-trigger">
-                        <option value="load" <?php selected($settings['trigger'], 'load'); ?>>Page Load</option>
-                        <option value="scroll" <?php selected($settings['trigger'], 'scroll'); ?>>Scroll</option>
-                        <option value="exit" <?php selected($settings['trigger'], 'exit'); ?>>Exit Intent</option>
-                        <option value="click" <?php selected($settings['trigger'], 'click'); ?>>Click</option>
-                    </select>
-                </td>
-            </tr>
+                <!-- Trigger -->
+                <div class="skmb-card">
+                    <div class="skmb-card-header">
+                        <span class="dashicons dashicons-admin-generic"></span>
+                        <strong><?php _e('Trigger Settings', 'sk-modal-builder'); ?></strong>
+                    </div>
 
-            <!-- Scroll Percentage -->
-            <tr class="sk-trigger sk-scroll">
-                <th><?php _e('Scroll Percentage', 'sk-modal-builder'); ?></th>
-                <td>
-                    <input type="number" min="1" max="100" name="sk_modal[scroll]" value="<?php echo esc_attr($settings['scroll']); ?>"> %
-                </td>
-            </tr>
+                    <div class="skmb-field">
+                        <label><?php _e('Trigger Type', 'sk-modal-builder'); ?></label>
+                        <select name="sk_modal[trigger]" id="sk-modal-trigger">
+                            <option value="load" <?php selected($settings['trigger'], 'load'); ?>>Page Load</option>
+                            <option value="scroll" <?php selected($settings['trigger'], 'scroll'); ?>>Scroll</option>
+                            <option value="exit" <?php selected($settings['trigger'], 'exit'); ?>>Exit Intent</option>
+                            <option value="click" <?php selected($settings['trigger'], 'click'); ?>>Click</option>
+                        </select>
+                    </div>
 
-            <!-- Display On -->
-            <tr>
-                <th><?php _e('Display On', 'sk-modal-builder'); ?></th>
-                <td>
-                    <select name="sk_modal[pages]" id="sk-modal-pages-select">
-                        <option value="all" <?php selected($settings['pages'], 'all'); ?>>Entire Site</option>
-                        <option value="specific" <?php selected($settings['pages'], 'specific'); ?>>Specific Pages</option>
-                    </select>
+                    <div class="skmb-field sk-trigger sk-scroll">
+                        <label><?php _e('Scroll Percentage', 'sk-modal-builder'); ?></label>
+                        <input type="number" min="1" max="100" name="sk_modal[scroll]" value="<?php echo esc_attr($settings['scroll']); ?>">
+                    </div>
+                </div>
 
-                    <!-- Front Page Checkbox -->
-                    <p id="sk-modal-front-page-wrapper" style="display: <?php echo ($settings['pages'] === 'specific') ? 'block' : 'none'; ?>; margin-top:5px;">
-                        <label>
-                            <input type="checkbox" name="sk_modal[front_page]" value="1" <?php checked($settings['front_page'], 1); ?>>
-                            <?php _e('Include Front Page', 'sk-modal-builder'); ?>
-                        </label>
-                    </p>
+                <!-- Display Rules -->
+                <div class="skmb-card">
+                    <div class="skmb-card-header">
+                        <span class="dashicons dashicons-admin-site-alt3"></span>
+                        <strong><?php _e('Display Rules', 'sk-modal-builder'); ?></strong>
+                    </div>
 
-                    <!-- Multi-select Pages -->
-                    <select name="sk_modal[selected_pages][]" id="sk-modal-specific-pages" multiple style="display: <?php echo ($settings['pages'] === 'specific') ? 'block' : 'none'; ?>; width:100%; margin-top:5px;">
-                        <?php foreach ($all_pages as $page): ?>
-                            <option value="<?php echo esc_attr($page->ID); ?>" <?php selected(in_array($page->ID, $settings['selected_pages'])); ?>>
-                                <?php echo esc_html($page->post_title); ?>
-                            </option>
-                        <?php endforeach; ?>
-                    </select>
-                    <p class="description"><?php _e('Select specific pages to display this modal.', 'sk-modal-builder'); ?></p>
-                </td>
-            </tr>
-        </table>
+                    <div class="skmb-field">
+                        <label><?php _e('Display On', 'sk-modal-builder'); ?></label>
+                        <select name="sk_modal[pages]" id="sk-modal-pages-select">
+                            <option value="all" <?php selected($settings['pages'], 'all'); ?>>Entire Site</option>
+                            <option value="specific" <?php selected($settings['pages'], 'specific'); ?>>Specific Pages</option>
+                        </select>
+                    </div>
+
+                    <label class="skmb-checkbox sk-specific">
+                        <input type="checkbox" name="sk_modal[front_page]" value="1" <?php checked($settings['front_page'], 1); ?>>
+                        <?php _e('Include Front Page', 'sk-modal-builder'); ?>
+                    </label>
+
+                    <div class="skmb-field sk-specific">
+                        <label><?php _e('Select Pages', 'sk-modal-builder'); ?></label>
+                        <select name="sk_modal[selected_pages][]" multiple>
+                            <?php foreach ($all_pages as $page): ?>
+                                <option value="<?php echo esc_attr($page->ID); ?>"
+                                    <?php selected(in_array($page->ID, (array) $settings['selected_pages'])); ?>>
+                                    <?php echo esc_html($page->post_title); ?>
+                                </option>
+                            <?php endforeach; ?>
+                        </select>
+                    </div>
+                </div>
+
+            </div>
+        </div>
         <?php
     }
 
