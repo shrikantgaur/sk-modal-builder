@@ -1,0 +1,298 @@
+/* ==========================
+   General Builder Layout
+========================== */
+.skmb-builder {
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #f9f9f9;
+    padding: 20px;
+}
+
+/* Sidebar */
+.skmb-sidebar {
+    width: 260px;
+    background: #ffffff;
+    border-radius: 12px;
+    border: 1px solid #e0e0e0;
+    padding: 20px;
+    box-shadow: 0 3px 10px rgba(0,0,0,.05);
+    flex-shrink: 0;
+}
+
+/* Main Content */
+.skmb-content {
+    flex: 1;
+    background: #ffffff;
+    border-radius: 12px;
+    border: 1px solid #e0e0e0;
+    padding: 25px;
+    box-shadow: 0 3px 10px rgba(0,0,0,.05);
+}
+
+/* Fields */
+.skmb-field {
+    margin-bottom: 20px;
+}
+
+.skmb-field label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: #333;
+}
+
+.skmb-field input,
+.skmb-field select,
+.skmb-field textarea {
+    width: 100%;
+    padding: 8px 12px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 14px;
+    transition: all 0.2s ease;
+}
+
+.skmb-field input:focus,
+.skmb-field select:focus,
+.skmb-field textarea:focus {
+    border-color: #2271b1;
+    box-shadow: 0 0 5px rgba(34, 113, 177, 0.2);
+    outline: none;
+}
+
+/* ===== Dashboard Base ===== */
+.sk-admin {
+    max-width: 1200px;
+}
+
+/* Header */
+.sk-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.sk-title {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.sk-title .dashicons {
+    font-size: 22px;
+}
+
+.sk-badge {
+    background: #f1f5f9;
+    color: #334155;
+    font-size: 12px;
+    padding: 4px 10px;
+    border-radius: 999px;
+    font-weight: 500;
+}
+
+.sk-subtitle {
+    margin: 6px 0 24px;
+    color: #64748b;
+}
+
+/* Stats */
+.sk-stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 16px;
+    margin-bottom: 28px;
+}
+
+.sk-stat-card {
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+    padding: 14px 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.sk-stat-left {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #475569;
+    font-size: 13px;
+}
+
+.sk-stat-left .dashicons {
+    font-size: 16px;
+    color: #2271b1;
+}
+
+.sk-stat-card strong {
+    font-size: 18px;
+    font-weight: 600;
+    color: #0f172a;
+}
+
+/* Status pill */
+.sk-status-pill {
+    font-size: 12px;
+    padding: 4px 10px;
+    border-radius: 999px;
+    font-weight: 600;
+}
+
+.sk-status-pill.active {
+    background: #ecfdf5;
+    color: #047857;
+}
+
+/* Main Grid */
+.sk-main-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 20px;
+}
+
+/* Cards */
+.sk-card {
+    background: #fff;
+    border-radius: 12px;
+    padding: 20px;
+    border: 1px solid #e5e7eb;
+}
+
+.sk-card h2 {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 15px;
+    margin-bottom: 14px;
+}
+
+/* Recent list */
+.sk-recent-list {
+    margin: 0;
+}
+
+.sk-recent-list li {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 1px solid #f1f5f9;
+}
+
+.sk-modal-title {
+    font-size: 13px;
+    color: #0f172a;
+}
+
+.sk-post-status {
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.sk-post-status.publish {
+    color: #16a34a;
+}
+
+.sk-post-status.draft {
+    color: #dc2626;
+}
+
+.sk-empty {
+    color: #94a3b8;
+    font-size: 13px;
+}
+
+/* Actions */
+.sk-action-btn {
+    display: block;
+    margin-top: 10px;
+}
+
+/* ==========================
+   Meta Box Styling
+========================== */
+#sk_modal_settings .form-table th {
+    width: 180px;
+    vertical-align: top;
+    padding-right: 15px;
+}
+
+#sk_modal_settings select,
+#sk_modal_settings input[type="number"],
+#sk_modal_settings input[type="text"],
+#sk_modal_settings input[type="color"] {
+    min-width: 200px;
+    padding: 6px 10px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+    transition: all 0.2s ease;
+}
+
+#sk_modal_settings select:focus,
+#sk_modal_settings input[type="number"]:focus,
+#sk_modal_settings input[type="text"]:focus,
+#sk_modal_settings input[type="color"]:focus {
+    border-color: #2271b1;
+    box-shadow: 0 0 5px rgba(34, 113, 177, 0.2);
+}
+
+/* Trigger-dependent rows */
+.sk-trigger {
+    display: none;
+    transition: all 0.3s ease;
+}
+
+/* ==========================
+   Status Box
+========================== */
+.sk-modal-status-box {
+    padding: 15px;
+    background: #fdfdfd;
+    border-radius: 10px;
+    border: 1px solid #e0e0e0;
+    box-shadow: inset 0 1px 3px rgba(0,0,0,0.05);
+}
+
+.sk-status-badge {
+    font-weight: 600;
+}
+
+.sk-status-badge.active {
+    color: #28a745;
+}
+
+.sk-status-badge.inactive {
+    color: #dc3545;
+}
+
+/* ==========================
+   Front Page & Page Selector
+========================== */
+#sk-modal-front-page-wrapper {
+    margin-top: 10px;
+}
+
+#sk-modal-specific-pages {
+    margin-top: 5px;
+    border-radius: 8px;
+    padding: 6px 10px;
+    border: 1px solid #ccc;
+    min-height: 120px;
+}
+
+/* ==========================
+   Responsive
+========================== */
+@media (max-width: 768px) {
+    .skmb-builder {
+        flex-direction: column;
+    }
+    .skmb-sidebar {
+        width: 100%;
+    }
+}
