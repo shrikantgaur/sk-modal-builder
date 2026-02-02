@@ -48,6 +48,38 @@ class SK_Modal_Admin_Meta_Boxes {
             <!-- LEFT CONTENT -->
             <div class="skmb-content">
 
+                <!-- Title Settings -->
+                <div class="skmb-card">
+                    <div class="skmb-card-header">
+                        <span class="dashicons dashicons-editor-textcolor"></span>
+                        <strong><?php _e('Title Settings', 'sk-modal-builder'); ?></strong>
+                    </div>
+
+                    <!-- Show/Hide Title -->
+                    <div class="skmb-field">
+                        <label class="skmb-switch">
+                            <input type="checkbox" name="sk_modal[show_title]" value="1" <?php checked($settings['show_title']?? 1, 1); ?>>
+                            <span class="skmb-slider"></span>
+                            <span class="skmb-switch-label"><?php _e('Show Modal Title', 'sk-modal-builder'); ?></span>
+                        </label>
+                    </div>
+
+                    <!-- Title Alignment -->
+                    <div class="skmb-field">
+                        <label><?php _e('Title Alignment', 'sk-modal-builder'); ?></label>
+                        <select name="sk_modal[title_align]">
+                            <?php
+                            $alignments = ['left' => 'Left', 'center' => 'Center', 'right' => 'Right'];
+                            foreach ($alignments as $key => $label):
+                            ?>
+                                <option value="<?php echo esc_attr($key); ?>" <?php selected($settings['title_align'] ?? 'center', $key); ?>>
+                                    <?php echo esc_html($label); ?>
+                                </option>
+                            <?php endforeach; ?>
+                        </select>
+                    </div>
+                </div>
+
                 <!-- Enable -->
                 <div class="skmb-card">
                     <div class="skmb-card-header">
@@ -164,6 +196,11 @@ class SK_Modal_Admin_Meta_Boxes {
         if (!is_array($settings)) {
             $settings = [];
         }
+
+        $settings['show_title'] = isset($_POST['sk_modal']['show_title']) ? 1 : 0;
+        $settings['title_align'] = in_array($_POST['sk_modal']['title_align'] ?? '', ['left','center','right'])
+            ? $_POST['sk_modal']['title_align']
+            : 'center';
 
         // Enable
         $settings['enabled'] = isset($_POST['sk_modal']['enabled']) ? 1 : 0;

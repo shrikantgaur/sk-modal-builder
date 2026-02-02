@@ -15,7 +15,7 @@ jQuery(function ($) {
 
         initColorPicker() {
             if ($.fn.wpColorPicker) {
-                $('.sk-color-field').wpColorPicker();
+                $('.sk-color-field').not('.wp-color-picker').wpColorPicker();
             }
         },
 
@@ -25,9 +25,9 @@ jQuery(function ($) {
                 $('.sk-trigger').hide();
 
                 const trigger = $('#sk-modal-trigger').val();
-                if (!trigger) return;
-
-                $('.sk-' + trigger).show();
+                if (trigger) {
+                    $('.sk-' + trigger).fadeIn(150);
+                }
             };
 
             toggle();

@@ -1,11 +1,5 @@
-<?php
-/**
- * Silence is golden.
- */
-if ( ! defined( 'ABSPATH' ) ) {
-    exit;
-}
-?>
+<?php if ( ! defined( 'ABSPATH' ) ) exit; ?>
 
-<button class="sk-modal-close">×</button>
-
+<button class="skmb-close" data-close aria-label="Close modal">
+    <span aria-hidden="true">&times;</span>
+</button>
