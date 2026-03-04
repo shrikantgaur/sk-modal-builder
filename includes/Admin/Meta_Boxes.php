@@ -60,13 +60,19 @@ class SK_Modal_Admin_Meta_Boxes {
                         <label class="skmb-switch">
                             <input type="checkbox" name="sk_modal[show_title]" value="1" <?php checked($settings['show_title']?? 1, 1); ?>>
                             <span class="skmb-slider"></span>
-                            <span class="skmb-switch-label"><?php _e('Show Modal Title', 'sk-modal-builder'); ?></span>
+                            <span class="skmb-switch-label">
+                                <?php _e('Show Modal Title', 'sk-modal-builder'); ?>
+                                <span class="dashicons dashicons-editor-help skmb-tooltip" data-tooltip="Enable this to display the modal title at the top of the modal."></span>
+                            </span>
                         </label>
                     </div>
 
                     <!-- Title Alignment -->
                     <div class="skmb-field">
-                        <label><?php _e('Title Alignment', 'sk-modal-builder'); ?></label>
+                        <label>
+                            <?php _e('Title Alignment', 'sk-modal-builder'); ?>
+                            <span class="dashicons dashicons-editor-help skmb-tooltip" title="Choose how the modal title is aligned: Left, Center, or Right."></span>
+                        </label>
                         <select name="sk_modal[title_align]">
                             <?php
                             $alignments = ['left' => 'Left', 'center' => 'Center', 'right' => 'Right'];
@@ -90,7 +96,10 @@ class SK_Modal_Admin_Meta_Boxes {
                     <label class="skmb-switch">
                         <input type="checkbox" name="sk_modal[enabled]" value="1" <?php checked($settings['enabled'], 1); ?>>
                         <span class="skmb-slider"></span>
-                        <span class="skmb-switch-label"><?php _e('Enable Modal', 'sk-modal-builder'); ?></span>
+                        <span class="skmb-switch-label">
+                            <?php _e('Enable Modal', 'sk-modal-builder'); ?>
+                            <span class="dashicons dashicons-editor-help skmb-tooltip" title="Toggle this to activate or deactivate the modal for this page/post."></span>
+                        </span>
                     </label>
                 </div>
 
@@ -102,7 +111,14 @@ class SK_Modal_Admin_Meta_Boxes {
                     </div>
 
                     <div class="skmb-field">
-                        <label><?php _e('Trigger Type', 'sk-modal-builder'); ?></label>
+                        <label>
+                            <?php _e('Trigger Type', 'sk-modal-builder'); ?>
+                            <span class="dashicons dashicons-editor-help skmb-tooltip" 
+                                data-tooltip="Page Load: Opens automatically on page load
+                    Scroll: Opens after user scrolls X%
+                    Exit Intent: Opens when user tries to leave
+                    Click: Opens when a button or link is clicked"></span>
+                        </label>
                         <select name="sk_modal[trigger]" id="sk-modal-trigger">
                             <option value="load" <?php selected($settings['trigger'], 'load'); ?>>Page Load</option>
                             <option value="scroll" <?php selected($settings['trigger'], 'scroll'); ?>>Scroll</option>
@@ -111,8 +127,12 @@ class SK_Modal_Admin_Meta_Boxes {
                         </select>
                     </div>
 
+
                     <div class="skmb-field sk-trigger sk-scroll">
-                        <label><?php _e('Scroll Percentage', 'sk-modal-builder'); ?></label>
+                        <label>
+                            <?php _e('Scroll Percentage', 'sk-modal-builder'); ?>
+                            <span class="dashicons dashicons-editor-help skmb-tooltip" title="If Trigger is set to Scroll, this defines how far (in %) the user must scroll before the modal appears."></span>
+                        </label>
                         <input type="number" min="1" max="100" name="sk_modal[scroll]" value="<?php echo esc_attr($settings['scroll']); ?>">
                     </div>
                 </div>
@@ -125,7 +145,10 @@ class SK_Modal_Admin_Meta_Boxes {
                     </div>
 
                     <div class="skmb-field">
-                        <label><?php _e('Display On', 'sk-modal-builder'); ?></label>
+                        <label>
+                            <?php _e('Display On', 'sk-modal-builder'); ?>
+                            <span class="dashicons dashicons-editor-help skmb-tooltip" title="Choose where the modal should appear: Entire Site or only Specific Pages."></span>
+                        </label>
                         <select name="sk_modal[pages]" id="sk-modal-pages-select">
                             <option value="all" <?php selected($settings['pages'], 'all'); ?>>Entire Site</option>
                             <option value="specific" <?php selected($settings['pages'], 'specific'); ?>>Specific Pages</option>
@@ -135,10 +158,14 @@ class SK_Modal_Admin_Meta_Boxes {
                     <label class="skmb-checkbox sk-specific">
                         <input type="checkbox" name="sk_modal[front_page]" value="1" <?php checked($settings['front_page'], 1); ?>>
                         <?php _e('Include Front Page', 'sk-modal-builder'); ?>
+                        <span class="dashicons dashicons-editor-help skmb-tooltip" title="Include the front page even if 'Specific Pages' is selected."></span>
                     </label>
 
                     <div class="skmb-field sk-specific">
-                        <label><?php _e('Select Pages', 'sk-modal-builder'); ?></label>
+                        <label>
+                            <?php _e('Select Pages', 'sk-modal-builder'); ?>
+                            <span class="dashicons dashicons-editor-help skmb-tooltip" title="Choose the pages where this modal should appear. Hold CTRL (CMD on Mac) to select multiple pages."></span>
+                        </label>
                         <select name="sk_modal[selected_pages][]" multiple>
                             <?php foreach ($all_pages as $page): ?>
                                 <option value="<?php echo esc_attr($page->ID); ?>"
@@ -149,7 +176,6 @@ class SK_Modal_Admin_Meta_Boxes {
                         </select>
                     </div>
                 </div>
-
             </div>
         </div>
         <?php
