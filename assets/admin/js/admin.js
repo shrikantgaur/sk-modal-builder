@@ -1,11 +1,11 @@
 /* global SKModalAdmin */
 
-console.log('SK Modal Builder Admin JS Loaded');
+(function ($) {
+    'use strict';
 
-jQuery(function ($) {
+    console.log('SK Modal Builder Admin JS Loaded');
 
     const SKMB = {
-
         init() {
             this.initColorPicker();
             this.initTriggers();
@@ -14,52 +14,75 @@ jQuery(function ($) {
         },
 
         initColorPicker() {
-            if ($.fn.wpColorPicker) {
-                $('.sk-color-field').not('.wp-color-picker').wpColorPicker();
-            }
+            $('.sk-color-field').each(function () {
+                const $input = $(this);
+
+                // Avoid re-initializing already initialized pickers
+                if (!$input.hasClass('wp-color-picker')) {
+                    $input.wpColorPicker({
+                        // Optional: customize palettes, change button text, etc.
+                        // palettes: ['#000', '#fff', '#f00'],
+                        change: function () {
+                            // Optional: trigger save or preview update
+                        },
+                        clear: function () {
+                            // Optional: handle clear button
+                        }
+                    });
+                }
+            });
         },
 
         initTriggers() {
-            const toggle = () => {
+            const $triggerSelect = $('#sk-modal-trigger');
 
+            const toggleSections = () => {
                 $('.sk-trigger').hide();
 
-                const trigger = $('#sk-modal-trigger').val();
-                if (trigger) {
-                    $('.sk-' + trigger).fadeIn(150);
+                const triggerType = $triggerSelect.val();
+                if (triggerType) {
+                    $(`.sk-${triggerType}`).fadeIn(150);
                 }
             };
 
-            toggle();
-            $(document).on('change', '#sk-modal-trigger', toggle);
+            // Run on load + listen for changes
+            toggleSections();
+            $triggerSelect.on('change', toggleSections);
         },
 
         initTabs() {
-            const $tabs = $('[data-skmb-tab]');
+            const $tabs   = $('[data-skmb-tab]');
             const $panels = $('.skmb-tab-panel');
 
-            if (!$tabs.length) return;
+            if (!$tabs.length) {
+                return;
+            }
 
-            $tabs.on('click', function (e) {
-                e.preventDefault();
-
-                const target = $(this).data('skmb-tab');
+            const activateTab = ($tab) => {
+                const target = $tab.data('skmb-tab');
 
                 $tabs.removeClass('active');
-                $(this).addClass('active');
+                $tab.addClass('active');
 
                 $panels.hide();
-                $('#' + target).fadeIn(150);
-            });
+                $(`#${target}`).fadeIn(150);
+            };
 
-            $tabs.first().trigger('click');
+            // Activate first tab on load
+            activateTab($tabs.first());
+
+            // Click handler
+            $tabs.on('click', function (e) {
+                e.preventDefault();
+                activateTab($(this));
+            });
         },
 
         initPageSelector() {
-            const $select = $('#sk-modal-pages-select');
+            const $select        = $('#sk-modal-pages-select');
             const $specificBlocks = $('.sk-specific');
 
-            const togglePages = () => {
+            const toggleVisibility = () => {
                 if ($select.val() === 'specific') {
                     $specificBlocks.slideDown(180);
                 } else {
@@ -67,11 +90,14 @@ jQuery(function ($) {
                 }
             };
 
-            $select.on('change', togglePages);
-            togglePages();
+            $select.on('change', toggleVisibility);
+            toggleVisibility(); // initial state
         }
     };
 
-    SKMB.init();
+    // Run initialization after DOM is ready
+    $(() => {
+        SKMB.init();
+    });
 
-});
+})(jQuery);

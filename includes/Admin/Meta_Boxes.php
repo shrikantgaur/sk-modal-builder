@@ -11,7 +11,7 @@ class SK_Modal_Admin_Meta_Boxes {
     public function register() {
         add_meta_box(
             'sk_modal_settings',
-            __('Modal Settings', 'sk-modal-builder'),
+            esc_html__('Modal Settings', 'sk-modal-builder'),
             [$this, 'render_settings_box'],
             'sk_modal',
             'normal',
@@ -20,7 +20,7 @@ class SK_Modal_Admin_Meta_Boxes {
 
         add_meta_box(
             'sk_modal_status',
-            __('Modal Status', 'sk-modal-builder'),
+            esc_html__('Modal Status', 'sk-modal-builder'),
             [$this, 'render_status_box'],
             'sk_modal',
             'side'
@@ -52,7 +52,7 @@ class SK_Modal_Admin_Meta_Boxes {
                 <div class="skmb-card">
                     <div class="skmb-card-header">
                         <span class="dashicons dashicons-editor-textcolor"></span>
-                        <strong><?php _e('Title Settings', 'sk-modal-builder'); ?></strong>
+                        <strong><?php esc_html_e('Title Settings', 'sk-modal-builder'); ?></strong>
                     </div>
 
                     <!-- Show/Hide Title -->
@@ -61,7 +61,7 @@ class SK_Modal_Admin_Meta_Boxes {
                             <input type="checkbox" name="sk_modal[show_title]" value="1" <?php checked($settings['show_title']?? 1, 1); ?>>
                             <span class="skmb-slider"></span>
                             <span class="skmb-switch-label">
-                                <?php _e('Show Modal Title', 'sk-modal-builder'); ?>
+                                <?php esc_html_e('Show Modal Title', 'sk-modal-builder'); ?>
                                 <span class="dashicons dashicons-editor-help skmb-tooltip" data-tooltip="Enable this to display the modal title at the top of the modal."></span>
                             </span>
                         </label>
@@ -70,7 +70,7 @@ class SK_Modal_Admin_Meta_Boxes {
                     <!-- Title Alignment -->
                     <div class="skmb-field">
                         <label>
-                            <?php _e('Title Alignment', 'sk-modal-builder'); ?>
+                            <?php esc_html_e('Title Alignment', 'sk-modal-builder'); ?>
                             <span class="dashicons dashicons-editor-help skmb-tooltip" title="Choose how the modal title is aligned: Left, Center, or Right."></span>
                         </label>
                         <select name="sk_modal[title_align]">
@@ -90,14 +90,14 @@ class SK_Modal_Admin_Meta_Boxes {
                 <div class="skmb-card">
                     <div class="skmb-card-header">
                         <span class="dashicons dashicons-visibility"></span>
-                        <strong><?php _e('Modal Activation', 'sk-modal-builder'); ?></strong>
+                        <strong><?php esc_html_e('Modal Activation', 'sk-modal-builder'); ?></strong>
                     </div>
 
                     <label class="skmb-switch">
                         <input type="checkbox" name="sk_modal[enabled]" value="1" <?php checked($settings['enabled'], 1); ?>>
                         <span class="skmb-slider"></span>
                         <span class="skmb-switch-label">
-                            <?php _e('Enable Modal', 'sk-modal-builder'); ?>
+                            <?php esc_html_e('Enable Modal', 'sk-modal-builder'); ?>
                             <span class="dashicons dashicons-editor-help skmb-tooltip" title="Toggle this to activate or deactivate the modal for this page/post."></span>
                         </span>
                     </label>
@@ -107,12 +107,12 @@ class SK_Modal_Admin_Meta_Boxes {
                 <div class="skmb-card">
                     <div class="skmb-card-header">
                         <span class="dashicons dashicons-admin-generic"></span>
-                        <strong><?php _e('Trigger Settings', 'sk-modal-builder'); ?></strong>
+                        <strong><?php esc_html_e('Trigger Settings', 'sk-modal-builder'); ?></strong>
                     </div>
 
                     <div class="skmb-field">
                         <label>
-                            <?php _e('Trigger Type', 'sk-modal-builder'); ?>
+                            <?php esc_html_e('Trigger Type', 'sk-modal-builder'); ?>
                             <span class="dashicons dashicons-editor-help skmb-tooltip" 
                                 data-tooltip="Page Load: Opens automatically on page load
                     Scroll: Opens after user scrolls X%
@@ -127,10 +127,9 @@ class SK_Modal_Admin_Meta_Boxes {
                         </select>
                     </div>
 
-
                     <div class="skmb-field sk-trigger sk-scroll">
                         <label>
-                            <?php _e('Scroll Percentage', 'sk-modal-builder'); ?>
+                            <?php esc_html_e('Scroll Percentage', 'sk-modal-builder'); ?>
                             <span class="dashicons dashicons-editor-help skmb-tooltip" title="If Trigger is set to Scroll, this defines how far (in %) the user must scroll before the modal appears."></span>
                         </label>
                         <input type="number" min="1" max="100" name="sk_modal[scroll]" value="<?php echo esc_attr($settings['scroll']); ?>">
@@ -141,12 +140,12 @@ class SK_Modal_Admin_Meta_Boxes {
                 <div class="skmb-card">
                     <div class="skmb-card-header">
                         <span class="dashicons dashicons-admin-site-alt3"></span>
-                        <strong><?php _e('Display Rules', 'sk-modal-builder'); ?></strong>
+                        <strong><?php esc_html_e('Display Rules', 'sk-modal-builder'); ?></strong>
                     </div>
 
                     <div class="skmb-field">
                         <label>
-                            <?php _e('Display On', 'sk-modal-builder'); ?>
+                            <?php esc_html_e('Display On', 'sk-modal-builder'); ?>
                             <span class="dashicons dashicons-editor-help skmb-tooltip" title="Choose where the modal should appear: Entire Site or only Specific Pages."></span>
                         </label>
                         <select name="sk_modal[pages]" id="sk-modal-pages-select">
@@ -157,13 +156,13 @@ class SK_Modal_Admin_Meta_Boxes {
 
                     <label class="skmb-checkbox sk-specific">
                         <input type="checkbox" name="sk_modal[front_page]" value="1" <?php checked($settings['front_page'], 1); ?>>
-                        <?php _e('Include Front Page', 'sk-modal-builder'); ?>
+                        <?php esc_html_e('Include Front Page', 'sk-modal-builder'); ?>
                         <span class="dashicons dashicons-editor-help skmb-tooltip" title="Include the front page even if 'Specific Pages' is selected."></span>
                     </label>
 
                     <div class="skmb-field sk-specific">
                         <label>
-                            <?php _e('Select Pages', 'sk-modal-builder'); ?>
+                            <?php esc_html_e('Select Pages', 'sk-modal-builder'); ?>
                             <span class="dashicons dashicons-editor-help skmb-tooltip" title="Choose the pages where this modal should appear. Hold CTRL (CMD on Mac) to select multiple pages."></span>
                         </label>
                         <select name="sk_modal[selected_pages][]" multiple>
@@ -187,9 +186,9 @@ class SK_Modal_Admin_Meta_Boxes {
         ?>
         <div class="sk-modal-status-box">
             <p>
-                <strong><?php _e('Status:', 'sk-modal-builder'); ?></strong>
+                <strong><?php esc_html_e('Status:', 'sk-modal-builder'); ?></strong>
                 <span class="sk-status-badge <?php echo $enabled ? 'active' : 'inactive'; ?>">
-                    <?php echo $enabled ? __('Active', 'sk-modal-builder') : __('Inactive', 'sk-modal-builder'); ?>
+                    <?php echo $enabled ? esc_html__('Active', 'sk-modal-builder') : esc_html__('Inactive', 'sk-modal-builder'); ?>
                 </span>
             </p>
         </div>
@@ -200,57 +199,75 @@ class SK_Modal_Admin_Meta_Boxes {
         <?php
     }
 
-    public function save($post_id) {
+    public function save( $post_id ) {
 
         // Security checks
-        if (!isset($_POST['sk_modal_nonce']) ||
-            !wp_verify_nonce($_POST['sk_modal_nonce'], 'sk_modal_save')) {
+        if ( ! isset( $_POST['sk_modal_nonce'] ) ) {
             return;
         }
 
-        if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) {
+        // Unslash + sanitize the nonce before verification (satisfies WPCS sniff)
+        $nonce = sanitize_text_field( wp_unslash( $_POST['sk_modal_nonce'] ) );
+
+        if ( ! wp_verify_nonce( $nonce, 'sk_modal_save' ) ) {
             return;
         }
 
-        if (!current_user_can('edit_post', $post_id)) {
+        if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
+            return;
+        }
+
+        if ( ! current_user_can( 'edit_post', $post_id ) ) {
             return;
         }
 
         // Always start with an array
-        $settings = get_post_meta($post_id, '_sk_modal', true);
+        $settings = get_post_meta( $post_id, '_sk_modal', true );
 
-        if (!is_array($settings)) {
+        if ( ! is_array( $settings ) ) {
             $settings = [];
         }
 
-        $settings['show_title'] = isset($_POST['sk_modal']['show_title']) ? 1 : 0;
-        $settings['title_align'] = in_array($_POST['sk_modal']['title_align'] ?? '', ['left','center','right'])
-            ? $_POST['sk_modal']['title_align']
+        // Title settings
+        $settings['show_title'] = isset( $_POST['sk_modal']['show_title'] ) ? 1 : 0;
+
+        // Title align – unslash + sanitize
+        $title_align_raw = isset( $_POST['sk_modal']['title_align'] ) 
+            ? sanitize_text_field( wp_unslash( $_POST['sk_modal']['title_align'] ) ) 
+            : 'center';
+
+        $settings['title_align'] = in_array( $title_align_raw, [ 'left', 'center', 'right' ], true )
+            ? $title_align_raw
             : 'center';
 
         // Enable
-        $settings['enabled'] = isset($_POST['sk_modal']['enabled']) ? 1 : 0;
+        $settings['enabled'] = isset( $_POST['sk_modal']['enabled'] ) ? 1 : 0;
 
-        // Trigger
-        $settings['trigger'] = sanitize_text_field($_POST['sk_modal']['trigger'] ?? 'load');
+        // Trigger – unslash + sanitize
+        $settings['trigger'] = isset( $_POST['sk_modal']['trigger'] )
+            ? sanitize_text_field( wp_unslash( $_POST['sk_modal']['trigger'] ) )
+            : 'load';
 
-        // Scroll
-        $settings['scroll'] = absint($_POST['sk_modal']['scroll'] ?? 50);
+        // Scroll – absint is safe enough here (no slash issue for numbers)
+        $settings['scroll'] = isset( $_POST['sk_modal']['scroll'] )
+            ? absint( $_POST['sk_modal']['scroll'] )
+            : 50;
 
-        // Pages type
-        $settings['pages'] = sanitize_text_field($_POST['sk_modal']['pages'] ?? 'all');
+        // Pages type – unslash + sanitize
+        $settings['pages'] = isset( $_POST['sk_modal']['pages'] )
+            ? sanitize_text_field( wp_unslash( $_POST['sk_modal']['pages'] ) )
+            : 'all';
 
         // Selected pages
         $settings['selected_pages'] = [];
-        if ($settings['pages'] === 'specific' && !empty($_POST['sk_modal']['selected_pages'])) {
-            $settings['selected_pages'] = array_map('absint', (array) $_POST['sk_modal']['selected_pages']);
+        if ( $settings['pages'] === 'specific' && ! empty( $_POST['sk_modal']['selected_pages'] ) ) {
+            // array_map('absint') is safe; no need to unslash individual IDs as they're numeric
+            $settings['selected_pages'] = array_map( 'absint', (array) $_POST['sk_modal']['selected_pages'] );
         }
 
         // Front page
-        $settings['front_page'] = isset($_POST['sk_modal']['front_page']) ? 1 : 0;
+        $settings['front_page'] = isset( $_POST['sk_modal']['front_page'] ) ? 1 : 0;
 
-        update_post_meta($post_id, '_sk_modal', $settings);
+        update_post_meta( $post_id, '_sk_modal', $settings );
     }
-
-
 }

@@ -1,4 +1,7 @@
 <?php
+if (!defined('ABSPATH')) {
+    exit; 
+}
 
 class SK_Modal_Admin_Post_Type {
 

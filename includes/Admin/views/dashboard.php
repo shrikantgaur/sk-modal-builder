@@ -1,14 +1,16 @@
 <?php
-if (!defined('ABSPATH')) exit;
+if (!defined('ABSPATH')) {
+    exit;
+}
 
-$counts = wp_count_posts('sk_modal');
-$total  = $counts->publish ?? 0;
-$draft  = $counts->draft ?? 0;
+$skmb_counts      = wp_count_posts('sk_modal');
+$skmb_total       = $skmb_counts->publish ?? 0;
+$skmb_draft       = $skmb_counts->draft ?? 0;
 
-$recent_modals = get_posts([
+$skmb_recent_modals = get_posts([
     'post_type'      => 'sk_modal',
     'posts_per_page' => 5,
-    'post_status'    => ['publish', 'draft']
+    'post_status'    => ['publish', 'draft'],
 ]);
 ?>
 
@@ -24,7 +26,7 @@ $recent_modals = get_posts([
     </div>
 
     <p class="sk-subtitle">
-        Manage, monitor and optimize your modal campaigns.
+        <?php esc_html_e('Manage, monitor and optimize your modal campaigns.', 'sk-modal-builder'); ?>
     </p>
 
     <!-- Stats -->
@@ -33,25 +35,25 @@ $recent_modals = get_posts([
         <div class="sk-stat-card">
             <div class="sk-stat-left">
                 <span class="dashicons dashicons-feedback"></span>
-                <span>Active Modals</span>
+                <span><?php esc_html_e('Active Modals', 'sk-modal-builder'); ?></span>
             </div>
-            <strong><?php echo esc_html($total); ?></strong>
+            <strong><?php echo esc_html($skmb_total); ?></strong>
         </div>
 
         <div class="sk-stat-card">
             <div class="sk-stat-left">
                 <span class="dashicons dashicons-edit"></span>
-                <span>Draft Modals</span>
+                <span><?php esc_html_e('Draft Modals', 'sk-modal-builder'); ?></span>
             </div>
-            <strong><?php echo esc_html($draft); ?></strong>
+            <strong><?php echo esc_html($skmb_draft); ?></strong>
         </div>
 
         <div class="sk-stat-card">
             <div class="sk-stat-left">
                 <span class="dashicons dashicons-yes-alt"></span>
-                <span>Status</span>
+                <span><?php esc_html_e('Status', 'sk-modal-builder'); ?></span>
             </div>
-            <span class="sk-status-pill active">Active</span>
+            <span class="sk-status-pill active"><?php esc_html_e('Active', 'sk-modal-builder'); ?></span>
         </div>
 
     </div>
@@ -63,24 +65,24 @@ $recent_modals = get_posts([
         <div class="sk-card">
             <h2>
                 <span class="dashicons dashicons-clock"></span>
-                Recent Modals
+                <?php esc_html_e('Recent Modals', 'sk-modal-builder'); ?>
             </h2>
 
-            <?php if ($recent_modals) : ?>
+            <?php if ($skmb_recent_modals) : ?>
                 <ul class="sk-recent-list">
-                    <?php foreach ($recent_modals as $modal) : ?>
+                    <?php foreach ($skmb_recent_modals as $skmb_modal) : ?>
                         <li>
                             <span class="sk-modal-title">
-                                <?php echo esc_html($modal->post_title ?: '(Untitled)'); ?>
+                                <?php echo esc_html($skmb_modal->post_title ?: __('(Untitled)', 'sk-modal-builder')); ?>
                             </span>
-                            <span class="sk-post-status <?php echo esc_attr($modal->post_status); ?>">
-                                <?php echo ucfirst($modal->post_status); ?>
+                            <span class="sk-post-status <?php echo esc_attr($skmb_modal->post_status); ?>">
+                                <?php echo esc_html(ucfirst($skmb_modal->post_status)); ?>
                             </span>
                         </li>
                     <?php endforeach; ?>
                 </ul>
             <?php else : ?>
-                <p class="sk-empty">No modals created yet.</p>
+                <p class="sk-empty"><?php esc_html_e('No modals created yet.', 'sk-modal-builder'); ?></p>
             <?php endif; ?>
         </div>
 
@@ -88,18 +90,18 @@ $recent_modals = get_posts([
         <div class="sk-card">
             <h2>
                 <span class="dashicons dashicons-admin-tools"></span>
-                Quick Actions
+                <?php esc_html_e('Quick Actions', 'sk-modal-builder'); ?>
             </h2>
 
-            <a href="<?php echo admin_url('post-new.php?post_type=sk_modal'); ?>" class="button button-primary sk-action-btn">
-                Create Modal
+            <a href="<?php echo esc_url(admin_url('post-new.php?post_type=sk_modal')); ?>"
+               class="button button-primary sk-action-btn">
+                <?php esc_html_e('Create Modal', 'sk-modal-builder'); ?>
             </a>
 
-            <a href="<?php echo admin_url('edit.php?post_type=sk_modal'); ?>" class="button sk-action-btn">
-                Manage Modals
+            <a href="<?php echo esc_url(admin_url('edit.php?post_type=sk_modal')); ?>"
+               class="button sk-action-btn">
+                <?php esc_html_e('Manage Modals', 'sk-modal-builder'); ?>
             </a>
         </div>
-
     </div>
-
 </div>
